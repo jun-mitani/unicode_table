@@ -1,0 +1,31 @@
+<html>
+<body>
+<div id="div1">
+</div>
+<script>
+	let s_tables = '';
+	s_tables += '<table border=1 cellspacing=0>';
+	for (let t_offset = 0; t_offset < 0xFFFF; t_offset += 0x0400 ) {
+		s_tables += '<tr><th>';
+		for (let i = 0; i < 0x0020; i++) {
+			s_tables += '<th>' + i.toString(16).padStart(2, '0').toUpperCase();
+		}
+		s_tables += '</tr>';
+
+		for (let r_offset = 0; r_offset < 0x0400; r_offset += 0x0020) {
+			s_tables += '<tr>';
+			let i = t_offset + r_offset;
+			s_tables += '<th>' + i.toString(16).padStart(4, '0').toUpperCase();
+			for (let c_offset = 0; c_offset < 0x0020; c_offset ++) {
+				let j = i + c_offset;
+				s_tables += '<td><center>&#x' + j.toString(16).padStart(4, '0').toUpperCase() + ';<br><small><small>' + j.toString(16).padStart(4, '0').toUpperCase() + '</small></small></center></td>';
+			}
+			s_tables += '</tr>';
+		}
+	}
+
+	let div1 = document.getElementById('div1');
+	div1.insertAdjacentHTML('beforeend', s_tables);
+</script>
+</body>
+</html>
